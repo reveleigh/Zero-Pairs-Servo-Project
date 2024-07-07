@@ -1,0 +1,81 @@
+/* style.css */
+
+/* Mobile-First Styles */
+body {
+  font-family: "Sono", sans-serif;
+  background-color: #080d25;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Button Container */
+.button-container {
+  text-align: center;
+  padding: 20px;
+}
+
+button {
+  display: block; /* Stack buttons vertically by default (mobile-first) */
+  width: calc(100% - 40px); /* Full width with margins */
+  margin: 10px auto; /* Center buttons horizontally */
+  font-family: "Sono", sans-serif;
+  padding: 15px;
+  font-size: 18px;
+  background-color: #1e284d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Disabled/Inactive Button */
+button:disabled,
+button[disabled] {
+  background-color: #555;
+  color: #999;
+  cursor: default;
+}
+
+/* Hover Effect (Only for enabled buttons) */
+button:not(:disabled):hover {
+  background-color: #355299;
+}
+
+/* Active/Click Effect (Only for enabled buttons) */
+button:not(:disabled):active {
+  transform: translateY(2px);
+  background-color: #293f78;
+}
+
+#runningIcon {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+  color: #00ffff;
+}
+
+/* Larger Screen Styles (Tablets and Desktops) */
+@media (min-width: 768px) {
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Add gap between buttons */
+  }
+
+  button {
+    display: inline-block; /* Arrange buttons horizontally on larger screens */
+    width: auto; /* Reset width to automatic */
+    margin: 0; /* Reset margin */
+  }
+}

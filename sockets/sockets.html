@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Servo Control</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='socket.io.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </head>
+  <body>
+    <h1>Servo Control</h1>
+    <button id="start-binary-clock">Start Binary Clock</button>
+    <button id="start-sweep">Start Sweep</button>
+    <button id="stop-routine">Stop Routine</button>
+  </body>
+</html>

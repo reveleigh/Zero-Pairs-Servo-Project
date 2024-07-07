@@ -1,0 +1,100 @@
+/* style.css */
+
+/* Mobile-First Styles */
+body {
+  font-family: "Sono", sans-serif;
+  background-color: #25080d;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Button Container */
+.button-container {
+  text-align: center;
+}
+
+button {
+  display: inline-block; /* Stack buttons vertically by default (mobile-first) */
+  width: calc(100% - 40px); /* Full width with margins */
+  margin: 5px auto; /* Center buttons horizontally */
+  font-family: "Sono", sans-serif;
+  padding: 10px;
+  font-size: 25px;
+  background-color: #4d1e28;
+  color: white;
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.num1Button {
+  background-color: #ebdade;
+  color: #25080d;
+}
+
+.num2Button {
+  background-color: #f8822f;
+  color: #25080d;
+}
+
+/* Disabled/Inactive Button */
+button:disabled,
+button[disabled] {
+  background-color: #555;
+  color: #999;
+  cursor: default;
+}
+
+/* Hover Effect (Only for enabled buttons) */
+button:not(:disabled):hover {
+  background-color: #993552;
+}
+
+.calculation-container {
+  text-align: center;
+  min-height: 70px;
+  display: flex; /* Make the container a flex container */
+  align-items: center; /* Vertically align items in the center */
+  justify-content: center; /* Horizontally align items in the center */
+}
+
+#calculationDisplay {
+  font-size: 40px;
+  width: 200px;
+  height: 50px;
+  background-color: rgba(
+    226,
+    186,
+    195,
+    0.2
+  ); /* Slightly transparent background */
+  border-radius: 5px;
+}
+
+#reset {
+  width: 200px;
+  height: 50px;
+}
+
+/* Larger Screen Styles (Tablets and Desktops) */
+@media (min-width: 768px) {
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Add gap between buttons */
+  }
+
+  button {
+    display: inline-block; /* Arrange buttons horizontally on larger screens */
+    margin: 10px; /* Reset margin */
+  }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zero Pair Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/static/zero-pair-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sono&display=swap"
+      rel="stylesheet"
+    />
+    <script src="/static/zero-pair.js"></script>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Zero Pair Calculator</h1>
+    <div class="calculation-container">
+      <div id="calculationDisplay"></div>
+    </div>
+
+    <div class="button-container">
+      <div id="num1Buttons">
+        {% for num in range(-8, 0) %}
+        <button class="num1Button" data-num="{{ num }}">{{ num }}</button>
+        {% endfor %} {% for num in range(1, 9) %}
+        <button class="num1Button" data-num="{{ num }}">{{ num }}</button>
+        {% endfor %}
+      </div>
+
+      <div id="operationButtons" class="hidden">
+        <button class="operationButton" data-op="%2B">+</button>
+        <button class="operationButton" data-op="-">-</button>
+      </div>
+
+      <div id="num2Buttons" class="hidden">
+        {% for num in range(-8, 0) %}
+        <button class="num2Button" data-num="{{ num }}">{{ num }}</button>
+        {% endfor %} {% for num in range(1, 9) %}
+        <button class="num2Button" data-num="{{ num }}">{{ num }}</button>
+        {% endfor %}
+      </div>
+
+      <div id="resetButton" class="hidden">
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+  </body>
+</html>

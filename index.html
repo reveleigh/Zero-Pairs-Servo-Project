@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Servo Controls</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sono&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <h1>Servo Control</h1>
+    <div class="button-container">
+      <button id="start-binary-clock">Binary Clock</button>
+      <button id="start-sweep">Sweep</button>
+      <button id="start-bounce">Bounce</button>
+      <a href="/zero-pair"><button id="zero-pair">Zero Pairs</button></a>
+      <button id="stop-routine">Stop</button>
+    </div>
+    <div id="runningIcon" style="display: none">Running...</div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
