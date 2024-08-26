@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Set System Time</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/static/zero-pair-style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center; margin-top: 20px">Set Time</h1>
+
+    {% if message %}
+    <div id="response" style="text-align: center; margin-bottom: 20px">
+      {{ message }}
+    </div>
+    {% endif %}
+
+    <form id="timeForm" method="post" style="text-align: center">
+      <div style="display: inline-block; margin-bottom: 10px">
+        <label for="hour" style="display: block; margin-bottom: 5px"
+          >Hour (1-12):</label
+        >
+        <input
+          type="number"
+          id="hour"
+          name="hour"
+          min="1"
+          max="12"
+          required
+          style="width: 50px; padding: 5px; font-size: 16px"
+        />
+      </div>
+      <br /><br />
+      <div style="display: inline-block">
+        <label for="minute" style="display: block; margin-bottom: 5px"
+          >Minute (0-59):</label
+        >
+        <input
+          type="number"
+          id="minute"
+          name="minute"
+          min="0"
+          max="59"
+          required
+          style="width: 50px; padding: 5px; font-size: 16px"
+        />
+      </div>
+      <br /><br />
+
+      <button
+        type="submit"
+        style="width: 100px; padding: 10px 20px; font-size: 18px"
+      >
+        Submit
+      </button>
+    </form>
+
+    <script>
+      const form = document.getElementById("timeForm");
+      const responseDiv = document.getElementById("response");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const formData = new FormData(form);
+        fetch("/set_time", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            responseDiv.textContent = data;
+          })
+          .catch((error) => {
+            responseDiv.textContent = "Error setting time: " + error;
+          });
+      });
+    </script>
+  </body>
+</html>

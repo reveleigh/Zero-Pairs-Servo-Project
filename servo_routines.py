@@ -14,8 +14,11 @@ for i in range(16):
 #Servo order for when used as a number line
 servo_order = [7,6,5,4,3,2,1,0,8,9,10,11,12,13,14,15]
 
+
 def binary_clock(stop_flag):
-    """Displays time in hours and minutes on servos, updating every second."""
+    """Displays time in hours and minutes on servos, updating only when necessary.
+    Uses internet time if available, otherwise falls back to system time."""
+
     last_hour = -1
     last_minute = -1
 
@@ -32,22 +35,34 @@ def binary_clock(stop_flag):
             angle = 180 if bit_value == 1 else 0
             kit.servo[servo_index].angle = angle
 
-    while not stop_flag.is_set():  # Check for stop flag
-        now = datetime.datetime.now()
-        hour_12 = now.hour % 12  # Get the hour in 12-hour format
+    while not stop_flag.is_set():
+        try:
+            has_internet = check_internet_connection()
 
-        # Check if either hour or minute has changed
-        if hour_12 != last_hour or now.minute != last_minute:
-            print(f"Time: {hour_12:02}:{now.minute:02}")
+            if has_internet:
+                now = datetime.datetime.now()
+            else:
+                # Get time from system clock
+                result = subprocess.run(['date', '+%Y %m %d %H %M'], capture_output=True, text=True)
+                year, month, day, hour_24, minute = map(int, result.stdout.split())
+                now = datetime.datetime(year=year, month=month, day=day,
+                                        hour=hour_24, minute=minute)
 
-        # Update servos (even if the time hasn't changed for a visual refresh)
-        set_servo_angles(hour_12, "hours")
-        set_servo_angles(now.minute, "minutes")
+            hour_12 = now.hour % 12
 
-        last_hour = hour_12
-        last_minute = now.minute
-        time.sleep(1)
+            # Check if either hour or minute has changed before updating servos
+            if hour_12 != last_hour or now.minute != last_minute:
+                print(f"Time: {hour_12:02}:{now.minute:02}")
+                set_servo_angles(hour_12, "hours")
+                set_servo_angles(now.minute, "minutes")
 
+            last_hour = hour_12
+            last_minute = now.minute
+            time.sleep(1)
+
+        except Exception as e:
+            print(f"Error getting time: {e}")
+            time.sleep(1)
 
 def sweep(stop_flag):
     # Main loop

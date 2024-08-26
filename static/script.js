@@ -5,16 +5,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const resetButton = document.getElementById("stop-routine");
   const runningIcon = document.getElementById("runningIcon");
   const zeroPairButton = document.getElementById("zero-pair");
+  const setTime = document.getElementById("set_time");
 
   function updateUI(status) {
     if (status === "running") {
       binaryClockButton.disabled = true;
+      setTime.disabled = true;
       sweepButton.disabled = true;
       bounceButton.disabled = true;
       zeroPairButton.disabled = true;
       runningIcon.style.display = "block"; // Show running icon
     } else {
       binaryClockButton.disabled = false;
+      setTime.disabled = false;
       sweepButton.disabled = false;
       bounceButton.disabled = false;
       zeroPairButton.disabled = false;

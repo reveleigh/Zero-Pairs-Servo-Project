@@ -127,6 +127,31 @@ def zero_pair_route():
             logging.error(f"Exception: {e}")
             traceback.print_exc()
             return jsonify(error=str(e)), 500
+
+@app.route('/set_time', methods=['GET', 'POST'])
+def set_time():
+    if request.method == 'POST':
+        hour = request.form.get('hour')
+        minute = request.form.get('minute')
+
+        if hour and minute:
+            try:
+                # Validate the input (ensure hour is 1-12, minute is 0-59)
+                hour = int(hour)
+                minute = int(minute)
+                if 1 <= hour <= 12 and 0 <= minute <= 59:
+                    # Convert 12-hour format to 24-hour format for system setting
+                    hour_24 = hour % 12  # 12 becomes 0 (midnight), rest remain the same
+                    subprocess.call(['sudo', 'date', '+%H:%M', '-s', f'{hour_24:02d}:{minute:02d}'])
+                    return render_template('set_time.html', message='Time set successfully! (Temporary, no RTC)')
+                else:
+                    return render_template('set_time.html', message='Invalid time format. Hour should be 1-12, minute should be 0-59.')
+            except ValueError:
+                return render_template('set_time.html', message='Invalid time format. Please provide integers for hour and minute.')
+        else:
+            return render_template('set_time.html', message='Missing hour or minute parameters.')
+    else:  # GET request
+        return render_template('set_time.html')
     
 
 if __name__ == '__main__':
